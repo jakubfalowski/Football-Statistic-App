@@ -1,0 +1,25 @@
+{
+  "root": "libs/web/data-access-flashscore",
+  "sourceRoot": "libs/web/data-access-flashscore/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/data-access-flashscore/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/data-access-flashscore"],
+      "options": {
+        "jestConfig": "libs/web/data-access-flashscore/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

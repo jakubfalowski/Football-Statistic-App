@@ -1,0 +1,25 @@
+{
+  "root": "libs/web/data-access-transfermarket",
+  "sourceRoot": "libs/web/data-access-transfermarket/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/data-access-transfermarket/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/data-access-transfermarket"],
+      "options": {
+        "jestConfig": "libs/web/data-access-transfermarket/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

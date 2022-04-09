@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "projects": {
+    "statistic-app": "apps/statistic-app",
+    "statistic-app-e2e": "apps/statistic-app-e2e",
+    "web": "libs/web",
+    "web-data-access-flashscore": "libs/web/data-access-flashscore",
+    "web-data-access-transfermarket": "libs/web/data-access-transfermarket"
+  }
+}
