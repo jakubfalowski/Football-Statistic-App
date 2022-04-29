@@ -1,10 +1,11 @@
 import Clubs from "./clubList";
+import { pierwszaLiga } from "./leagues/pierwszaLiga";
 
 export function ClubIndex(){
     return(
         <div>
             <h3> Wyszukaj klub </h3>
-            <h4> Bundesliga </h4>
+            {/* <h4> Bundesliga </h4>
                 <Clubs clubID="nVp0wiqd" clubName="Bayern Monachium" />
                 <Clubs clubID="nP1i5US1" clubName="Borussia Dortmund" />
                 <Clubs clubID="4jcj2zMd" clubName="Bayer Leverkusen" />
@@ -22,7 +23,11 @@ export function ClubIndex(){
                 <Clubs clubID="nJQmYp1B" clubName="VfB Stuttgart" />
                 <Clubs clubID="pp38UXK8" clubName="Arminia Bielefeld" />
                 <Clubs clubID="2y0u8Wrq" clubName="Hertha Berlin" />
-                <Clubs clubID="CCQGbik8" clubName="Furth" />
+                <Clubs clubID="CCQGbik8" clubName="Furth" /> */}
+            <h4> 1 liga Polska</h4>
+            {pierwszaLiga.map((team) => (
+                <Clubs clubID={team.clubID} clubName={team.clubName} />
+            ))}
         </div>
     )
 }
