@@ -72,3 +72,9 @@ export const pierwszaLiga = [
         clubName: 'GKS Jastrzębie',
     }
 ]
+
+export const dataID = [
+    {
+        clubID: 'nVp0wiqd',
+        clubName: 'Bayern Monachium',
+    }]

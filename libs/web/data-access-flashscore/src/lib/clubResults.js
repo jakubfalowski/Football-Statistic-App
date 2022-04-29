@@ -1,9 +1,5 @@
 import React, {useState} from "react";
-// import PropTypes from 'prop-types';
-
-var pathname = window.location.pathname;
-pathname = pathname.replace('/flashscore/', '');
-const query = pathname;
+import { useParams } from "react-router-dom";
 
 const options = {
   method: 'GET',
@@ -16,7 +12,10 @@ const options = {
 // 35ffe6e4c5mshe6f63287717ea95p1950a0jsna16c5a14a971 KEY2
 
 export function ClubResults(){
+  const {query} = useParams();
     const [clubs, setClubs] = useState([]);
+    let teamValue = 0;
+    let multiplier = 1;
 
       if (!query) return<></>;
   
@@ -29,6 +28,21 @@ export function ClubResults(){
         console.log(results);
         setClubs(results);
       }
+      if(clubs !== undefined){
+        clubs.slice(clubs.length-15, clubs.length).map((item, lastMatches) => {
+          if(lastMatches < 5) multiplier = 0.75
+          else if(lastMatches < 10) multiplier = 1
+          else multiplier = 1.25
+
+          if(item.HOME_SCORE_CURRENT === item.AWAY_SCORE_CURRENT) teamValue += (1*multiplier);
+          if(item.HOME_PARTICIPANT_IDS[0]===query){
+            if(item.HOME_SCORE_CURRENT > item.AWAY_SCORE_CURRENT) teamValue += (3*multiplier);
+          }
+          else{
+            if(item.HOME_SCORE_CURRENT < item.AWAY_SCORE_CURRENT) teamValue += (3*multiplier);
+          }
+        })
+      }
 
     return(
         <div>
@@ -39,11 +53,12 @@ export function ClubResults(){
                 <th>Gospodarze</th>
                 <th>Goście</th>
               </tr>
-            {clubs !== undefined ? clubs.map((item, i) => {
+            {clubs !== undefined ? clubs.slice(clubs.length-15, clubs.length).map((item, i) => {
             return (
               <tr key={i}>
                 <td>{item.HOME_NAME} {item.HOME_SCORE_CURRENT}</td>
                 <td>{item.AWAY_NAME} {item.AWAY_SCORE_CURRENT}</td>
+                <td> {i} </td>
               </tr>
             )
             }): 
@@ -51,6 +66,7 @@ export function ClubResults(){
                 <td colspan="2">Brak wyników wyszukiwania</td>
             </tr>}
             </table>
+            <b>{teamValue}</b>
             <button onClick={fetchData}>XD</button>
         </div>
     )

@@ -1,5 +1,5 @@
 import Clubs from "./clubList";
-import { pierwszaLiga } from "./leagues/pierwszaLiga";
+import { pierwszaLiga, Bundesliga} from "./clubsIdData";
 
 export function ClubIndex(){
     return(
