@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
+import MatchStatistic from "./matchStatistic";
 
 const options = {
   method: 'GET',
@@ -20,6 +21,7 @@ export function ClubResults(){
     let homeMatches = [];
     let awayMatches = [];
     let multiplier = 1;
+    let XD = 1;
   
       async function fetchData() {
         const response = await fetch(
@@ -30,6 +32,11 @@ export function ClubResults(){
         console.log(results);
         setClubs(results);
       }
+      
+      useEffect(() => {
+        fetchData();
+        console.log("a")
+      }, [XD]);
 
       function teamStrength(){
 
@@ -95,7 +102,7 @@ export function ClubResults(){
             </tr>}
             </table>
             <b>Forma zespołu: {teamValue} <br/>U siebie: {(homeValue)}pkt.<br/>Na wyjeździe: {awayValue}pkt.<br/></b>
-            <button onClick={fetchData}>XD</button>
+            
         </div>
     )
 }

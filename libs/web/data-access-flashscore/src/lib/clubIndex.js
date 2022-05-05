@@ -1,5 +1,5 @@
 import Clubs from "./clubList";
-import { pierwszaLiga, Bundesliga} from "./clubsIdData";
+import { pierwszaLiga, Bundesliga, ekstraklasa} from "./clubsIdData";
 
 export function ClubIndex(){
     return(
@@ -24,6 +24,10 @@ export function ClubIndex(){
                 <Clubs clubID="pp38UXK8" clubName="Arminia Bielefeld" />
                 <Clubs clubID="2y0u8Wrq" clubName="Hertha Berlin" />
                 <Clubs clubID="CCQGbik8" clubName="Furth" /> */}
+            <h4> Ekstrakalsa</h4>
+            {ekstraklasa.map((team) => (
+                <Clubs clubID={team.clubID} clubName={team.clubName} />
+            ))}
             <h4> 1 liga Polska</h4>
             {pierwszaLiga.map((team) => (
                 <Clubs clubID={team.clubID} clubName={team.clubName} />

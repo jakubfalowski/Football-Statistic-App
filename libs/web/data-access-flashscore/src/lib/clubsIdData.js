@@ -78,3 +78,78 @@ export const dataID = [
         clubID: 'nVp0wiqd',
         clubName: 'Bayern Monachium',
     }]
+
+export const ekstraklasa = [
+    {
+        clubID: 'SQOrbYim',
+        clubName: 'Raków',
+    },
+    {
+        clubID: 'OpNH7Ouf',
+        clubName: 'Lech',
+    },
+    {
+        clubID: 'Um9YwPQ0',
+        clubName: 'Pogoń',
+    },
+    {
+        clubID: 'GGLmkiK8',
+        clubName: 'Lechia',
+    },
+    {
+        clubID: 've2oT9ck',
+        clubName: 'Piast',
+    },
+    {
+        clubID: 'QoZYVU3E',
+        clubName: 'Wisła Płock',
+    },
+    {
+        clubID: 'zD5nYhAT',
+        clubName: 'Radomiak',
+    },
+    {
+        clubID: 'KvXSf2A6',
+        clubName: 'Cracovia',
+    },
+    {
+        clubID: '2LH3Ywq4',
+        clubName: 'Górnik Zabrze',
+    },
+    {
+        clubID: 'pxXiDZkQ',
+        clubName: 'Stal Mielec',
+    },
+    {
+        clubID: 'CrVUWAl8',
+        clubName: 'Warta Poznań',
+    },
+    {
+        clubID: 'K6kUepBs',
+        clubName: 'Legia',
+    },
+    {
+        clubID: 'lIDaZJTc',
+        clubName: 'Jagiellonia',
+    },
+    {
+        clubID: 'E1Oxemse',
+        clubName: 'Śląsk',
+    },
+    {
+        clubID: 'tlYOere0',
+        clubName: 'Zagłębie Lubin',
+    },
+    {
+        clubID: 'rob20Q2Q',
+        clubName: 'Wisła Kraków',
+    },
+    {
+        clubID: 'YNkK4khO',
+        clubName: 'Termalica',
+    },
+    {
+        clubID: 'ImAVQStr',
+        clubName: 'Górnik Łęczna',
+    }
+]

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-export function MatchStatistic(){
+export function MatchStatistic(props){
     const [statistic, setStatistic] = useState([]);
 
     const XD = '1'
-    const matchID = 'KWLYpDWA';
-    const fetchURL = `https://flashscore.p.rapidapi.com/v1/events/statistics?locale=en_GB&event_id=${matchID}`
+    // const matchID = 'KWLYpDWA';
+    const fetchURL = `https://flashscore.p.rapidapi.com/v1/events/statistics?locale=en_GB&event_id=${props.matchID}`
     let home = 0;
     let away = 0;
 
