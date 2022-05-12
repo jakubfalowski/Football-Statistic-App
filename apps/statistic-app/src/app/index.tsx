@@ -17,7 +17,7 @@ function Index(){
         <Route path={'/flashscore/:query'} element= {<ClubsResults />} />
         <Route path={'/transfermarkt'} element= {<PlayerSearch />} />
         <Route path={"/statistic/:matchID"} element ={<MatchStatistic matchID="KWLYpDWA"/>} />
-        <Route path={"/XD"} element ={<ClubAll/>} />
+        <Route path={"/prediction"} element ={<ClubAll/>} />
       </Routes>
     </Router>);
 }

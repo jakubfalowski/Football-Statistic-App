@@ -5,25 +5,24 @@ import { calculate1x2 } from "./calculate1x2";
 
 const key1 = '1941a7725amshe72888a2f321827p18582bjsnddf354460ab2'
 const key2 = '35ffe6e4c5mshe6f63287717ea95p1950a0jsna16c5a14a971'
+const key3 = 'a33fdebe8cmshe3e2c58ac427eebp1b8d9bjsn0e949c6172f7'
 const options = {
   method: 'GET',
   headers: {
     'X-RapidAPI-Host': 'flashscore.p.rapidapi.com',
-    'X-RapidAPI-Key': key2
+    'X-RapidAPI-Key': key3
   }
 };
 
 export function ClubsResults(props){
   // const {query} = useParams();
     const [clubs, setClubs] = useState([]);
-    // const [winHomePercent, setWinHomePercent] = useState();
-    // const [drawPercent, setDrawPercent] = useState();
-    // const [winAwayPercent, setWinAwayPercent] = useState();
     let Home;
     let Away;
     let teamValue = 0;
     let homeValue = 0; 
     let awayValue = 0;
+    let goals = 0;
     let homeMatches = [];
     let awayMatches = [];
     let multiplier = 1;
@@ -35,12 +34,15 @@ export function ClubsResults(props){
 
     function ClubResults(query){
       async function fetchData() {
+        try{
         const response = await fetch(
           `https://flashscore.p.rapidapi.com/v1/teams/results?sport_id=1&team_id=${query}&locale=en_GB&page=1`,options
         );
         const data = await response.json();
         const results = data.DATA[0].EVENTS;
-        setClubs(results);
+        setClubs(results);} catch(error){
+          console.log(error)
+        }
       }
       
       useEffect(() => {
@@ -48,12 +50,8 @@ export function ClubsResults(props){
       }, [ifFetch]);
 
       function teamStrength(){
-        if(changeQuery===true){
+        if(query===props.away){
           teamValue = 0;
-          homeValue = 0; 
-          awayValue = 0;
-          homeMatches = [];
-          awayMatches = [];
           multiplier = 1;
         }
 
@@ -71,35 +69,34 @@ export function ClubsResults(props){
             if(item.HOME_SCORE_CURRENT < item.AWAY_SCORE_CURRENT) teamValue += (3*multiplier);
             awayMatches.push(item)
           }
+          goals += parseInt(item.HOME_SCORE_CURRENT)+parseInt(item.AWAY_SCORE_CURRENT)
         })
       
-        homeMatches.slice(homeMatches.length-5,homeMatches.length).map(item =>{
-          if(item.HOME_SCORE_CURRENT === item.AWAY_SCORE_CURRENT) homeValue += 1;
-          if(item.HOME_PARTICIPANT_IDS[0]===query){
-            if(item.HOME_SCORE_CURRENT > item.AWAY_SCORE_CURRENT) homeValue += 3;
-          }
-          else{
-            if(item.HOME_SCORE_CURRENT < item.AWAY_SCORE_CURRENT) homeValue += 3;
-          }
-        })
-
-        awayMatches.slice(awayMatches.length-5,awayMatches.length).map(item =>{
-          if(item.HOME_SCORE_CURRENT === item.AWAY_SCORE_CURRENT) awayValue += 1;
-          if(item.AWAY_PARTICIPANT_IDS[0]===query){
-            if(item.HOME_SCORE_CURRENT < item.AWAY_SCORE_CURRENT) awayValue += 3;
-          }
-          else{
-            if(item.HOME_SCORE_CURRENT > item.AWAY_SCORE_CURRENT) awayValue += 3;
-          }
-        })
         if(query===props.home){
-          Home = teamValue+homeValue
-          changeQuery = true;
+          homeMatches.slice(homeMatches.length-5,homeMatches.length).map(item =>{
+            if(item.HOME_SCORE_CURRENT === item.AWAY_SCORE_CURRENT) homeValue += 1;
+            if(item.HOME_PARTICIPANT_IDS[0]===query){
+              if(item.HOME_SCORE_CURRENT > item.AWAY_SCORE_CURRENT) homeValue += 3;
+            }
+            else{
+              if(item.HOME_SCORE_CURRENT < item.AWAY_SCORE_CURRENT) homeValue += 3;
+            }
+          })
+          Home = teamValue+homeValue // homeValue fixuje sie
+          
         }
-  
-        else if(query===props.away){
+
+        if(query===props.away){
+          awayMatches.slice(awayMatches.length-5,awayMatches.length).map(item =>{
+            if(item.HOME_SCORE_CURRENT === item.AWAY_SCORE_CURRENT) awayValue += 1;
+            if(item.AWAY_PARTICIPANT_IDS[0]===query){
+              if(item.HOME_SCORE_CURRENT < item.AWAY_SCORE_CURRENT) awayValue += 3;
+            }
+            else{
+              if(item.HOME_SCORE_CURRENT > item.AWAY_SCORE_CURRENT) awayValue += 3;
+            }
+          })
           Away = teamValue+awayValue;
-          changeQuery = false
         }
     }
 
@@ -107,21 +104,11 @@ export function ClubsResults(props){
     
   }
     return(
-        <div>
-            <p>Home: {Home}, {Math.round(Home/(Home+Away)*100)}%, </p>
-            <p>Away: {Away}, {Math.round(Away/(Home+Away)*100)}%, </p>
-            <table>
-              <tr>
-                <th>1</th>
-                <th>X</th>
-                <th>2</th>
-                {calculate1x2(Math.round(Home/(Home+Away)*100),Math.round(Away/(Home+Away)*100) )}
-              </tr>
-              <tr>
-                
-              </tr>
-            </table>
-        </div>
+      <div>
+        <p>Home: {Home}, {Math.round(Home/(Home+Away)*100)}%</p>
+        <p>Away: {Away}, {Math.round(Away/(Home+Away)*100)}% </p>
+          {calculate1x2(Math.round(Home/(Home+Away)*100),Math.round(Away/(Home+Away)*100), goals)}
+      </div>
     )
           
 }

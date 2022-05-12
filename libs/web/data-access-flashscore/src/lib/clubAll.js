@@ -3,7 +3,7 @@ import MatchStatistic from "./matchStatistic"
 
 export function ClubAll(){
     return(
-        <> <ClubsResults home="W8mj7MDD" away="G8FL0ShI"/> </>
+        <> <ClubsResults home="CCbwwqt7" away="vo6umLPj"/> </>
     )
 }
 
