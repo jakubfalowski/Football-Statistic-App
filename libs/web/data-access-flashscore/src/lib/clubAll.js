@@ -1,8 +1,10 @@
-import ClubResults from "./clubResults"
+import ClubsResults from "./clubResults"
 import MatchStatistic from "./matchStatistic"
 
-export default function clubAll(props){
+export function ClubAll(){
     return(
-        <> <ClubResults /> <MatchStatistic /> </>
+        <> <ClubsResults home="W8mj7MDD" away="G8FL0ShI"/> </>
     )
 }
+
+export default ClubAll

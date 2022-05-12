@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export function MatchStatistic(props){
     const [statistic, setStatistic] = useState([]);
 
-    const XD = '1'
+    const ifFetch = true
     // const matchID = 'KWLYpDWA';
     const fetchURL = `https://flashscore.p.rapidapi.com/v1/events/statistics?locale=en_GB&event_id=${props.matchID}`
     let home = 0;
@@ -27,7 +27,7 @@ export function MatchStatistic(props){
       useEffect(() => {
         fetchData();
         console.log("a")
-      }, [XD]);
+      }, [ifFetch]);
 
 
       statistic.map(item => {
