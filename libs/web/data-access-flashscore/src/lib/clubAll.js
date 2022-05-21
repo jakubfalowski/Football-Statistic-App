@@ -1,9 +1,9 @@
-import ClubsResults from "./clubResults"
+import ClubResults from "./clubResults"
 import MatchStatistic from "./matchStatistic"
 
 export function ClubAll(){
     return(
-        <> <ClubsResults home="CCbwwqt7" away="vo6umLPj"/> </>
+        <> <ClubResults home="OpNH7Ouf" away="tlYOere0"/> </>
     )
 }
 
