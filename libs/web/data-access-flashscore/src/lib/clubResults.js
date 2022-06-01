@@ -13,7 +13,7 @@ const options = {
   method: 'GET',
   headers: {
     'X-RapidAPI-Host': 'flashscore.p.rapidapi.com',
-    'X-RapidAPI-Key': key3
+    'X-RapidAPI-Key': key1
   }
 };
 
@@ -21,29 +21,21 @@ const options = {
 
    export function ClubResults(props){
       const [clubs, setClubs] = useState([]);
-      // const [clubs2, setClubs2] = useState([]);
+      const [clubs2, setClubs2] = useState([]);
     let Home = 0;
     let Away = 0;
     let ifFetch = true;
     let changeQuery = false;
 
-      async function fetchData() {
+      async function fetchData(query) {
         try{
         const response = await fetch(
-          `https://flashscore.p.rapidapi.com/v1/teams/results?sport_id=1&team_id=${props.home}&locale=en_GB&page=1`,options
+          `https://flashscore.p.rapidapi.com/v1/teams/results?sport_id=1&team_id=${query}&locale=en_GB&page=1`,options
         );
         const data = await response.json();
-        
-        const results = data.DATA[0].EVENTS;        
-        setClubs(results);
-
-        // const response2 = await fetch(
-        //   `https://flashscore.p.rapidapi.com/v1/teams/results?sport_id=1&team_id=${props.away}&locale=en_GB&page=1`,options
-        // );
-        // const data2 = await response2.json();
-        // const results2 = data2.DATA[0].EVENTS;
-        // setClubs2(results2);
-      
+        const results = data.DATA[0].EVENTS;
+        if(query === props.home) setClubs(results);
+        if(query === props.away) setClubs2(results)
       } catch(error){
           console.log(error)
         }
@@ -51,40 +43,40 @@ const options = {
 
       
       useEffect(() => {
-        fetchData();
+        fetchData(props.home);
+        fetchData(props.away);
       }, [ifFetch]);
 
-      function teamStrength(){
-        // if(query===props.away){
-        //   teamValue = 0;
-        //   multiplier = 1;
-        // }
+      teamStrength('home');
+      teamStrength('away');
 
-        clubs.slice(clubs.length-15, clubs.length).map((item, lastMatches) => {
-          allMatchesPush(item, lastMatches, props.home)
-        })
+      function teamStrength(team){
 
-        // clubs2.slice(clubs2.length-15, clubs2.length).map((item, lastMatches) => {
-        //   allMatchesPush(item, lastMatches, props.away)
-        // })
-      
+        if(team === 'home'){
+          console.log('home')
+          console.log(clubs)
+          clubs.slice(clubs.length-15, clubs.length).map((item, lastMatches) => {
+            allMatchesPush(item, lastMatches, props.home)
+          })
+
           homeMatches.slice(homeMatches.length-5,homeMatches.length).map(item =>{
             homeMatchesPush(item, props.home)
           })
-          console.log("team, home:"+teamValue,homeValue)
-          Home = teamValue+homeValue // homeValue fixuje sie
-          
+          Home = teamValue+homeValue // home
+        }
 
+        if(team === 'away'){
+          console.log('away')
+          console.log(clubs2)
+          clubs2.slice(clubs2.length-15, clubs2.length).map((item, lastMatches) => {
+            allMatchesPush(item, lastMatches, props.away)
+          })
           awayMatches.slice(awayMatches.length-5,awayMatches.length).map(item =>{
             awayMatchesPush(item, props.home);
           })
-          console.log("team, away:"+teamValue, awayValue)
           Away = teamValue+awayValue;
-    }
-
-    if(clubs !== undefined) {
-      teamStrength();
-    }
+        } 
+      }
     return(
       <tr>
         <td>{Home}</td>

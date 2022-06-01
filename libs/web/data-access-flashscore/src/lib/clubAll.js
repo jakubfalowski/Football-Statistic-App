@@ -17,7 +17,7 @@ export function ClubAll(){
     )
 
     const rows = (
-        <ClubResults home="OpNH7Ouf" away="tlYOere0"/> 
+        <ClubResults home="SQOrbYim" away="OpNH7Ouf"/> 
     )
     return(
     <Table captionSide="bottom">
