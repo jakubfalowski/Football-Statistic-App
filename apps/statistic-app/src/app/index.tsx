@@ -5,7 +5,7 @@ import{
   Route,
   } from "react-router-dom"
 import {PlayerSearch} from '@statistic-app/web/data-access-transfermarket'
-import {ClubResults, ClubIndex, MatchStatistic, ClubAll} from '@statistic-app/web/data-access-flashscore'
+import {ClubResults, ClubIndex, MatchStatistic, ClubAll, MatchPrediction} from '@statistic-app/web/data-access-flashscore'
 
 
 function Index(){
@@ -18,6 +18,7 @@ function Index(){
         <Route path={'/transfermarkt'} element= {<PlayerSearch />} />
         <Route path={"/statistic/:matchID"} element ={<MatchStatistic matchID="KWLYpDWA"/>} />
         <Route path={"/prediction"} element ={<ClubAll/>} />
+        <Route path={"/xdd"} element ={<MatchPrediction/>} />
       </Routes>
     </Router>);
 }

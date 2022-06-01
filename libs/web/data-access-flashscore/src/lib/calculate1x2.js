@@ -97,19 +97,10 @@ export function calculate1x2(homePercent,awayPercent, goals){
 
 
     return(
-    <>
-    <table>
-        <tr>
-            <th>1</th>
-            <th>X</th>
-            <th>2</th>
-        </tr>
-        <tr>
+        <>
             <td>{winHomePercent}</td>
             <td>{drawPercent}</td>
             <td>{winAwayPercent}</td>
-        </tr>
-    </table>
-      <h4>Prognozowany wynik: {result}</h4>
-    </>)
+            <td>{result}</td>
+        </>)
   }

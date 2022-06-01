@@ -86,11 +86,13 @@ const options = {
       teamStrength();
     }
     return(
-      <div>
-        <p>Home: {Home}, {Math.round(Home/(Home+Away)*100)}%</p>
-        <p>Away: {Away}, {Math.round(Away/(Home+Away)*100)}% </p>
+      <tr>
+        <td>{Home}</td>
+        <td>{Math.round(Home/(Home+Away)*100)}%</td>
+        <td>{Away}</td>
+        <td>{Math.round(Away/(Home+Away)*100)}% </td>
           {calculate1x2(Math.round(Home/(Home+Away)*100),Math.round(Away/(Home+Away)*100), goals)}
-      </div>
+      </tr>
     )
 
   }

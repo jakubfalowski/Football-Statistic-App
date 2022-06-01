@@ -19,9 +19,6 @@
       "@statistic-app/web/data-access-flashscore": [
         "libs/web/data-access-flashscore/src/index.ts"
       ],
-      "@statistic-app/web/data-access-prediction-forebet": [
-        "libs/web/data-access-prediction-forebet/src/index.ts"
-      ],
       "@statistic-app/web/data-access-transfermarket": [
         "libs/web/data-access-transfermarket/src/index.ts"
       ]
