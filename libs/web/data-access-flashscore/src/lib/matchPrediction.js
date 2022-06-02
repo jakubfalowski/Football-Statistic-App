@@ -1,18 +1,8 @@
 import { useEffect, useState } from "react";
-
-const key1 = '1941a7725amshe72888a2f321827p18582bjsnddf354460ab2'
-const key2 = '35ffe6e4c5mshe6f63287717ea95p1950a0jsna16c5a14a971'
-const key3 = 'a33fdebe8cmshe3e2c58ac427eebp1b8d9bjsn0e949c6172f7' // 12.05
-const options = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Host': 'flashscore.p.rapidapi.com',
-    'X-RapidAPI-Key': key1
-  }
-};
+import { options } from "./fetchOption";
 
 
-export function MatchPrediction(){
+export function MatchPrediction(props){
     const [homeOdds, setHomeOdds] = useState(0);
     const [drawOdds, setDrawOdds] = useState(0);
     const [awayOdds, setAwayOdds] = useState(0);
@@ -22,12 +12,13 @@ export function MatchPrediction(){
     async function fetchData() {
         try{
         const response = await fetch(
-          `https://flashscore.p.rapidapi.com/v1/events/odds?locale=en_GB&event_id=2kMVjvr1`,options
+          `https://flashscore.p.rapidapi.com/v1/events/odds?locale=en_GB&event_id=${props.match}`,options
         );
         const data = await response.json();
         setHomeOdds(data.DATA[0].PERIODS[0].GROUPS[0].MARKETS[0].ODD_CELL_FIRST.VALUE)      
         setDrawOdds(data.DATA[0].PERIODS[0].GROUPS[0].MARKETS[0].ODD_CELL_SECOND.VALUE)  
         setAwayOdds(data.DATA[0].PERIODS[0].GROUPS[0].MARKETS[0].ODD_CELL_THIRD.VALUE)  
+        console.log(data)
       } catch(error){
           console.log(error)
         }
@@ -36,12 +27,29 @@ export function MatchPrediction(){
       useEffect(() => {
         fetchData();
       }, [ifFetch]);
+
+      // * 88 bo 12 procent podatku, nie ma /100 żeby wyszły procenty
       return(
-      <div>
-          <p>{homeOdds} = {(parseFloat(homeOdds)*88/100).toFixed(2)} {(1/parseFloat(homeOdds)*88/100).toFixed(2)}%</p>
-          <p>{drawOdds} = {(parseFloat(drawOdds)*88/100).toFixed(2)} {(1/parseFloat(drawOdds)*88/100).toFixed(2)}%</p>
-          <p>{awayOdds} = {(parseFloat(awayOdds)*88/100).toFixed(2)} {(1/parseFloat(awayOdds)*88/100).toFixed(2)}%</p>
-      </div>)
+      <>
+      <tr>
+        <td>Kursy na</td>
+        <td>{homeOdds}</td>
+        <td>{drawOdds}</td>
+        <td>{awayOdds}</td>
+      </tr>
+      <tr>
+        <td>Zysk na</td>
+        <td>{(parseFloat(homeOdds)*88/100-1).toFixed(2)}</td>
+        <td>{(parseFloat(drawOdds)*88/100-1).toFixed(2)}</td>
+        <td>{(parseFloat(awayOdds)*88/100-1).toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td>Prawdopodobieństwo na</td>
+        <td>{(1/parseFloat(homeOdds)*88).toFixed(2)}%</td> 
+        <td>{(1/parseFloat(drawOdds)*88).toFixed(2)}%</td>
+        <td>{(1/parseFloat(awayOdds)*88).toFixed(2)}%</td>
+      </tr>
+      </>)
 }
 
 export default MatchPrediction

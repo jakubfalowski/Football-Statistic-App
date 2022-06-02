@@ -1,30 +1,50 @@
+import { useParams } from "react-router-dom";
+
 import ClubResults from "./clubResults"
 import './style.css'
 import { Table } from '@mantine/core';
+import MatchPrediction from "./matchPrediction";
 
-export function ClubAll(){
-    const ths = (
+export function ClubAll(props){
+    const {match,home,away} = useParams();
+
+    const td1 = (
+    <tr>
+        {/* <td>Punkty gospodarzy</td> */}
+        {/* <td>Szanse gospodarzy bez remisu</td> */}
+        {/* <td>Punkty gości</td> */}
+        {/* <td>Szanse gości bez remisu</td> */}
+        <td>Dokładny wynik</td>
+        <td>Gospodarze</td>
+        <td>Remis</td>
+        <td>Goście</td>
+    </tr>
+    )
+    const td2 =(
         <tr>
-            <td>Home points</td>
-            <td>Home percent</td>
-            <td>Away points</td>
-            <td>Away percent</td>
-            <td>1</td>
-            <td>X</td>
-            <td>2</td>
-            <td>Result</td>
+            <td> </td>
+            <td>Gospodarze</td>
+            <td>Remis</td>
+            <td>Goście</td>
         </tr>
     )
 
-    const rows = (
-        <ClubResults home="SQOrbYim" away="OpNH7Ouf"/> 
-    )
+    const row1 = (<tr><ClubResults home={home} away={away}/></tr>)
+    const row2 = (<MatchPrediction match={match}/>)
     return(
-    <Table captionSide="bottom">
-      <caption>Moja aplikacja</caption>
-      <thead>{ths}</thead>
-      <tbody>{rows}</tbody>
+    <>
+    <Table captionSide="bottom" className="myScript">
+        <caption>Moja aplikacja</caption>
+        <thead>{td1}</thead>
+        <tbody>{row1}</tbody>
     </Table>
+    <br />
+    <Table captionSide="bottom" className="odds">
+        <caption>Na podstawie kursów</caption>
+        <thead>{td2}</thead>
+        <tbody>{row2}</tbody>
+    </Table>
+    </>
     )
 }
 
