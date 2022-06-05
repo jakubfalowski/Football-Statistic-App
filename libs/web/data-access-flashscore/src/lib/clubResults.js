@@ -7,11 +7,12 @@ import { homeMatchesPush, homeValue } from "./homeMatchesPush";
 import { awayMatchesPush, awayValue } from "./awayMatchesPush";
 import {options} from './fetchOption'
 
+export let Home;
+export let Away;
+
    export function ClubResults(props){
       const [clubs, setClubs] = useState([]);
       const [clubs2, setClubs2] = useState([]);
-      let Home = 0;
-      let Away = 0;
       let ifFetch = true;
 
       async function fetchData(query) {

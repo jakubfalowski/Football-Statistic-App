@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
-import ClubResults from "./clubResults"
+import ClubResults, {Home, Away} from "./clubResults"
 import './style.css'
-import { Table } from '@mantine/core';
+import { Table, Button, Collapse } from '@mantine/core';
 import MatchPrediction from "./matchPrediction";
 
-export function ClubAll(props){
+export function ClubAll(){
+    const [opened, setOpen] = useState(false);
     const {match,home,away} = useParams();
 
     const td1 = (
@@ -38,6 +40,14 @@ export function ClubAll(props){
         <thead>{td1}</thead>
         <tbody>{row1}</tbody>
     </Table>
+    <Button onClick={() => setOpen((o) => !o)}>
+        Toggle content
+      </Button>
+
+      <Collapse in={opened}>
+        {Home}mam oczy zmeczone jak droopy{Away}
+      </Collapse>
+    {/* <a href={`/results/${match}/${home}/${away}/info`}>pokaż więcej</a> */}
     <br />
     <Table captionSide="bottom" className="odds">
         <caption>Na podstawie kursów</caption>
