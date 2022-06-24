@@ -5,10 +5,11 @@ import {options} from './fetchOption'
 
 export function PageIndex(){
     const [dataset, setDataset] = useState();
+    const [leagueName, setLeagueName] = useState();
     const date = new Date();
     let today = [];
     for(let i = 0; i < 7; i++){
-        today[i] = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+(date.getDate()+i);
+        today[i] = date.getFullYear()+'-'+(date.getMonth()+2)+'-'+(date.getDate()-i);
     } 
     let ifFetch = true;
     
@@ -16,8 +17,8 @@ export function PageIndex(){
         try{
             const response = await fetch(`https://flashscore.p.rapidapi.com/v1/tournaments/fixtures?tournament_stage_id=${query}&locale=en_GB&page=1`,options);
             const data = await response.json();
+            setLeagueName(data.DATA[0].NAME);
             const results = data.DATA[0].EVENTS;
-            console.log(results)
             setDataset(results);
         } catch(error){
           console.log(error)
@@ -25,14 +26,14 @@ export function PageIndex(){
     }
 
       useEffect(() => {
-        fetchData('Ec9S31zb');
+        fetchData('4fofM1vn');
       }, [ifFetch]);
 
     return(
         <div className="center">
-            <h2>Liga argentyńska</h2>
+            <h2>{leagueName}</h2>
             { dataset !== undefined && dataset.map((data, i) => {
-                for(let daysMatch=0; daysMatch<7; daysMatch++){
+                for(let daysMatch=7; daysMatch>0; daysMatch--){
                     if(convertToDate(data.START_TIME).endsWith(today[daysMatch])){
                         // https://mantine.dev/dates/date-picker/#min-and-max-dates przerobic na to
                         return(

@@ -18,7 +18,6 @@ export function MatchPrediction(props){
         setHomeOdds(data.DATA[0].PERIODS[0].GROUPS[0].MARKETS[0].ODD_CELL_FIRST.VALUE)      
         setDrawOdds(data.DATA[0].PERIODS[0].GROUPS[0].MARKETS[0].ODD_CELL_SECOND.VALUE)  
         setAwayOdds(data.DATA[0].PERIODS[0].GROUPS[0].MARKETS[0].ODD_CELL_THIRD.VALUE)  
-        console.log(data)
       } catch(error){
           console.log(error)
         }

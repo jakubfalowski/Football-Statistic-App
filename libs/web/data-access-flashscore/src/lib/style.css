@@ -2,6 +2,7 @@ body{
     background-color: #1d1e42;
     display: flex;
     justify-content: center;
+    color: white;
 }
 #root{
     width: 70%;

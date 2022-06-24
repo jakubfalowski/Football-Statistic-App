@@ -4,7 +4,7 @@ export function calculate1x2(homePercent,awayPercent, goals){
     let winAwayPercent = 30;
     let result=''
     let degreeGoals = 0;
-    console.log(goals+"eeeeeeeee")// zamiast 2 druzyn to bierze u siebie i na wyjedzie
+    // console.log(goals+"eeeeeeeee")// zamiast 2 druzyn to bierze u siebie i na wyjedzie
 
     if(goals<60) degreeGoals = 1 // poniżej 2 goli na mecz
     if(goals >= 60 && goals < 70) degreeGoals = 2 // 2-2.(3)
